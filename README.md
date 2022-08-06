@@ -42,4 +42,8 @@ Example README created by the generator can be found in the dist folder of the p
 
 The following demonstration can be viewed as a video on YouTube at this location: [README Generator](https://www.youtube.com/watch?v=Cc4trKLPNAg)
 
-![GIF Demonstrating Using the Generator](./Generator_Demo.gif)
+![GIF Demonstrating Using the Generator](./assets/Generator_Demo.gif)
+
+The following is a demonstration of the Table of Contents for the README: [README Generator: Table of Contents](https://youtu.be/jl5_H1CPgXo)
+
+![GIF Demonstrating the Table of Contents for the generated README](./assets/readme-toc-demo.gif)

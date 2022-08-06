@@ -1,10 +1,9 @@
-// TODO: Include packages needed for this application
-const fs = require('fs');
-const inquirer = require('inquirer');
+const fs = require('fs');       // necessary for saving the README using the file system
+const inquirer = require('inquirer');   // necessary to prompt the user for input for the project
 const generateMarkdown = require('./utils/generateMarkdown');
 
 
-// TODO: Create an array of questions for user input
+// Simple array of questions to pass to inquirer, all simple objects with type, name and message, with choices for questions that require options
 const questions = [
     {
         type: 'input',
@@ -35,7 +34,7 @@ const questions = [
         type: 'list',
         name: 'license',
         message: 'What type of license does the project have?',
-        choices: ['MIT','GPL','Apache', 'BSD']
+        choices: ['MIT', 'GPL', 'Apache', 'BSD']
     },
     {
         type: 'input',
@@ -59,14 +58,17 @@ const questions = [
     }
 ];
 
-// TODO: Create a function to write README file
+// Using promises, this function is responsible for writing the generated README file to the specified destination
 const writeToFile = (fileName, data) => {
     return new Promise((resolve, reject) => {
+        // writes to the file in the dist directory under the name specified
         fs.writeFile('./dist/' + fileName + '.md', data, err => {
+            // if there is an error the promise rejects
             if (err) {
                 reject(err);
                 return;
             }
+            // otherwise the promise is resolved and a message is sent back
             resolve({
                 ok: true,
                 message: 'README Created!'
@@ -75,13 +77,17 @@ const writeToFile = (fileName, data) => {
     });
 };
 
-// TODO: Create a function to initialize app
+// function that initializes the app, using promises to prompt the user, generate the markdown for the README, then saves the file with the writeToFile function
 const init = () => {
+    // prompts the user with the array of questions
     inquirer.prompt(questions)
-        .then(readmeData => {return writeToFile('README', generateMarkdown(readmeData)) })
+        // uses the responses from the user to generate the markdown and write the file to the specified name
+        .then(readmeData => { return writeToFile('README', generateMarkdown(readmeData)) })
+        // logs the response from the write to file function
         .then(writeResponse => {
             console.log(writeResponse);
         })
+        // catches any errors that may occur in any of the functions and logs them
         .catch(err => {
             console.log(err);
         });
